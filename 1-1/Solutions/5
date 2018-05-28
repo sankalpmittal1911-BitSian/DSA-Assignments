@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <math.h>
+long long int power(int x,int n,long long int M)
+{
+    if(n==0)
+        return 1;
+    else if(n%2 == 0)        //n is even
+        return power((x*x)%M,n/2,M);
+    else                             //n is odd
+        return (x*power((x*x)%M,(n-1)/2,M))%M;
+
+}
+int main(void) {
+	int n,x=2;
+	scanf("%d",&n);
+	long long int m = pow(10,10);
+	long long int r = power(x,n,m);
+	printf("%lld",r);
+	return 0;
+}
