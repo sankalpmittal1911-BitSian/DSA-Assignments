@@ -1,0 +1,31 @@
+#include<stdio.h>
+int main()
+{
+    long long int nPerson,budget,hotel,week,price,sit,i,j,flag,cost,tempCost,get;
+    while(scanf("%lld %lld %lld %lld",&nPerson, &budget, &hotel, &week)==4)
+    {
+      cost=500005;get=0;
+        for(i=1;i<=hotel;i++)
+        {
+            flag=0;
+            scanf("%lld",&price);
+            for(j=1;j<=week;j++)
+            {
+                scanf("%lld",&sit);
+                if(sit>=nPerson)
+                    flag=1;
+            }
+            tempCost=price*nPerson;
+            if(flag==1 && tempCost<=budget && cost>tempCost)
+            {
+                cost=tempCost;
+                get=1;
+            }
+        }
+        if(get==1)
+            printf("%lld\n",cost);
+        else
+            printf("stay home\n");
+    }
+    return 0;
+}
