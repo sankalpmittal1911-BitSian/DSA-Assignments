@@ -1,0 +1,31 @@
+#include<stdio.h>
+int a[100100];
+int min(int a,int b){
+	if(a>b) return b;
+	else return a;
+}
+int main(){
+	int T,n,S,i;
+	scanf("%d",&T);
+    while(T--){
+    	scanf("%d%d",&n,&S);
+        for(i=1;i<=n;++i)
+        	scanf("%d",&a[i]);
+        int ans=n+1,tmp=0,s=1,t=1;//ans:the_length,tmp:mark_the_sum,t:back_now,s:front_now
+        while(1){// make an ongoing runing
+            while(t<=n && tmp<S)
+            	tmp+=a[t],t++;//if has not visted all num already|and|the sum has not bigger than the given S
+            //just add it ,and renew the back_now
+            if(tmp<S) break;//if tmp<S,just means that t>n and it can not satisfy the given S,just no_solution_case,just break
+            ans=min(ans,t-s);
+            tmp-=a[s++];
+	          //renew the best solution,and lower it so that it may have better_section than this
+            //why this method is right,because the section must be successive and if from 1 to i have not safisfy the given S,from j to i(1<j<i)can not safisfy the given S too
+            //and if it satisfy ,maybe the final_several_nums are large,and cut it can be better 
+        }
+        if(ans<=n)	printf("%d\n",ans);
+        else printf("0\n");//if the ans is inside n(just it is in the correctly_section(from 1 to n),just printf the ans
+        //or it must be beyond the correctly_section,it means no_solution,just printf 0
+    }
+    return 0;
+}
