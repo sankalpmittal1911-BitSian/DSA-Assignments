@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main(void) {
+	// your code goes here
+	int n,i,j,key;
+	scanf("%d",&n);
+	int a[n];
+	for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	for(j=1;j<n;j++){
+		key = a[j];
+		for(i=j;i>0;i--){
+			if(key<a[i-1]){
+				int temp=a[i-1];
+				a[i-1]=key;
+				a[i]=temp;
+			}
+		}
+	}
+	for(i=0;i<n;i++){
+		printf("%d ",a[i]);
+	}
+	return 0;
+}
