@@ -1,3 +1,5 @@
+//Implement stack using Linked List
+
 #include <stdio.h>
 
 struct Node{
