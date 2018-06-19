@@ -1,0 +1,65 @@
+// Find nth node from the end of a linked list in one single pass.
+
+#include <stdio.h>
+
+struct Node{
+	int data;
+	struct Node* next;
+};
+
+void push(struct Node** head,int num)
+{
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node -> data = num;
+	new_node -> next = NULL;
+	struct Node* temp = (*head);
+	if (*head == NULL)
+	{
+		*head = new_node;
+		return;
+	}  
+	else{
+		while(temp -> next != NULL){
+			temp = temp -> next;
+		}
+		temp -> next = new_node;
+		return;
+	}
+}
+
+void printlist(struct Node** head)
+{
+	struct Node* temp = (*head);
+            while(temp != NULL)
+            {
+            printf("%d ",temp -> data);
+            temp = temp -> next;
+            }
+	printf("\n");
+}
+int main(void) {
+	struct Node* head;
+	struct Node* ref;
+	ref = NULL;
+	head = NULL;
+	int ct,i,n;
+	scanf("%d%d",&ct,&n);
+
+	for(i=0;i<ct;i++){
+		int num;
+		scanf("%d",&num);
+		push(&head,num);
+		printlist(&head);
+	}
+	ref = head;
+	for(i = 0;i < n; i++){
+		ref = ref -> next;
+	}
+	struct Node* temp = head;
+	while(ref != NULL){
+		temp = temp -> next;
+		ref = ref -> next;
+	}
+	printf("%d\n", temp -> data);
+	return 0;
+}
