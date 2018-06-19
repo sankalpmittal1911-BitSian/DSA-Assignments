@@ -1,0 +1,57 @@
+//Check whether the given single linked list is either  NULL terminated or ends in a cycle in O(n) time.
+
+#include <stdio.h>
+
+struct Node{
+	int data;
+	struct Node* next;
+};
+
+void push(struct Node** head,int num){
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node -> data = num;
+	new_node -> next = NULL;
+	
+	if((*head)==NULL){
+		(*head) = new_node;
+		return;
+	}
+	else{
+		struct Node* temp = (*head);
+		while(temp -> next != NULL){
+			temp = temp -> next;
+		}
+		temp -> next = new_node;
+		return;
+	}
+}
+int main(void) {
+	struct Node* head;
+	head = NULL;
+	int n,i;
+	scanf("%d",&n);
+	
+	for(i=0;i<n;i++){
+		int num;
+		scanf("%d",&num);
+		push(&head,num);
+	}
+	int flag =0;
+	struct Node* temp = head;
+	while(temp != NULL){
+		if(temp -> next == head){
+			flag = 1;
+			break;
+		}
+		else{
+			temp = temp -> next;
+		}
+	}
+	if(flag ==1){
+		printf("Cycle\n");
+	}
+	else{
+		printf("Null Terminated\n");
+	}
+	return 0;
+}
