@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+struct Node{
+	int data;
+	struct Node* next;
+};
+
+void push(struct Node** head,int num)
+{
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node -> data = num;
+	new_node -> next = (*head);
+	(*head) = new_node;
+}
+
+void pop(struct Node** head)
+{
+    if(head != NULL){
+        struct Node *temp= (*head);
+        (*head) = (*head) -> next;
+        free(temp);
+    }
+    else
+        printf("Empty\n");
+}
+
+void printlist(struct Node** head)
+{
+	struct Node* temp = (*head);
+            while(temp != NULL)
+            {
+            printf("%d ",temp -> data);
+            temp = temp -> next;
+            }
+	printf("\n");
+}
+int main(void) {
+	struct Node* head;
+	head = NULL;
+	int n,i;
+	scanf("%d",&n);
+
+	for(i=0;i<n;i++){
+		int num;
+		scanf("%d",&num);
+		push(&head,num);
+		printlist(&head);
+	}
+	for(i=0;i<n;i++){
+		pop(&head);
+		printlist(&head);
+	}
+	return 0;
+}
