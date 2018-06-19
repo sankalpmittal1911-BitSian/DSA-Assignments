@@ -1,0 +1,76 @@
+// Write a program to insert a node in sorted linked list.
+
+#include <stdio.h>
+
+struct Node{
+	int data;
+	struct Node* next;
+};
+
+void push(struct Node** head,int num){
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node -> data = num;
+	new_node -> next = NULL;
+	
+	struct Node* temp =(*head);
+	if((*head)==NULL){
+		(*head) = new_node;
+		return;
+	}
+	else{
+		while(temp -> next != NULL){
+			temp = temp -> next;
+		}
+		temp -> next = new_node;
+		return;
+	}
+}
+
+void printlist(struct Node** head){
+	struct Node* temp = (*head);
+	while(temp != NULL){
+		printf("%d ",temp -> data);
+		temp = temp -> next;
+	}
+	printf("\n");
+}
+
+int main(void) {
+	struct Node* head;
+	head = NULL;
+	int n,i,x;
+	scanf("%d%d",&n,&x);
+	for(i=0;i<n;i++){
+		int num;
+		scanf("%d",&num);
+		push(&head,num);
+	}
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node -> data = x;
+	new_node -> next = NULL;
+	
+	struct Node* temp = head;
+	while(temp->next != NULL && x >= (temp->next->data)){
+		temp = temp -> next;
+	}
+	if(temp -> next == NULL){
+		temp -> next = new_node;	
+	}
+	else if(temp == head){
+		if(x >= temp -> data){
+			new_node -> next = head -> next;
+			head-> next = new_node;
+		}
+		else{
+			new_node -> next = head;
+			head = new_node;
+		}
+	}
+	else{
+		new_node -> next = temp-> next;
+		temp -> next = new_node;
+	}
+	
+	printlist(&head);
+	return 0;
+}
