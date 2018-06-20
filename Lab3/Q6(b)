@@ -26,15 +26,25 @@ void push(struct Node** head,int num){
 	}
 }
 
-void reverse(struct Node* p,struct Node* head){
-	if(p -> next == NULL){
-		(*head) = p;
-		return;
-	}
-	reverse(p->next,(*head));
-	struct Node* q = p-> next;
-	q -> next = p;
-	p -> next = NULL;
+void recursiveReverse(struct Node** head_ref)
+{
+    struct Node* first;
+    struct Node* rest;
+      
+    if (*head_ref == NULL)
+       return;   
+ 
+    first = *head_ref;  
+    rest  = first->next;
+ 
+    if (rest == NULL)
+       return;   
+ 
+    /* reverse the rest list and put the first element at the end */
+    recursiveReverse(&rest);
+    first->next->next  = first;  
+    first->next  = NULL;          
+    *head_ref = rest;              
 }
 
 void printlist(struct Node** head){
@@ -56,8 +66,7 @@ int main(void) {
 		scanf("%d",&num);
 		push(&head,num);
 	}
-	struct Node* temp1 = head;
-	reverse(&temp1,&head)
+	recursiveReverse(&head);
 	printlist(&head);
 	return 0;
 }
