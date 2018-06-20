@@ -1,0 +1,60 @@
+// Reverse a single linked list in pairs by Iterative method
+
+#include <stdio.h>
+
+struct Node{
+	int data;
+	struct Node* next;
+};
+void push(struct Node** head,int num){
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node -> data = num;
+	new_node -> next = NULL;
+	
+	struct Node* temp = (*head);
+	if( (*head) == NULL){
+		(*head) = new_node;
+		return;
+	}
+	else{
+		while(temp -> next != NULL){
+			temp = temp -> next;
+		}
+		temp -> next = new_node;
+		return;
+	}
+}
+
+void reverse(struct Node** head){
+	struct Node* temp = (*head);
+	while(temp != NULL && temp -> next != NULL){
+		int x;
+		x= temp-> data;
+		temp -> data = temp -> next -> data ;
+		temp -> next -> data = x;
+		temp = temp -> next -> next;
+	}
+}
+void printlist(struct Node** head){
+	struct Node* temp = (*head);
+	while(temp != NULL){
+		printf("%d ",temp -> data);
+		temp = temp -> next;
+	}
+	printf("\n");
+}
+
+int main(void) {
+	struct Node* head;
+	head = NULL;
+	int n,i;
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		int num;
+		scanf("%d",&num);
+		push(&head,num);
+	}
+	reverse(&head);
+	printlist(&head);
+	return 0;
+}
