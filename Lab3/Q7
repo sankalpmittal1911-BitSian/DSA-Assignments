@@ -1,0 +1,60 @@
+// Middle of LL in one scan
+
+#include <stdio.h>
+
+struct Node{
+	int data;
+	struct Node* next;
+};
+
+void push(struct Node** head,int num){
+	struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+	new_node -> data = num;
+	new_node -> next = NULL;
+	
+	struct Node* temp =(*head);
+	if((*head)==NULL){
+		(*head) = new_node;
+		return;
+	}
+	else{
+		while(temp -> next != NULL){
+			temp = temp -> next;
+		}
+		temp -> next = new_node;
+		return;
+	}
+}
+
+void printlist(struct Node** head){
+	struct Node* temp = (*head);
+	while(temp != NULL){
+		printf("%d ",temp -> data);
+		temp = temp -> next;
+	}
+	printf("\n");
+}
+
+int main(void) {
+	struct Node* head;
+	head = NULL;
+	int n,i;
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		int num;
+		scanf("%d",&num);
+		push(&head,num);
+	}
+	printlist(&head);
+	struct Node* temp1 =head;
+	struct Node* temp2 =head;
+	while(temp2 ->next != NULL){
+		temp2 = temp2 -> next;
+		if(temp2 -> next != NULL){
+			temp2 = temp2 -> next;
+		}
+		temp1 = temp1 -> next;
+	}
+	printf("%d\n",temp1-> data);
+	return 0;
+}
