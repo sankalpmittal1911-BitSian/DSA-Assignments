@@ -1,0 +1,49 @@
+// Write a program to reverse the elements of the stack using only stack operations.
+
+#include<stdio.h>
+#include"stack.h"
+void insertAtBottom(struct stack *S,int data)
+{
+    if(isEmpty(S))
+    {
+    push(S,data);
+    return ;
+    }
+    else
+    {
+    int temp=pop(S);
+    insertAtBottom(S,data);
+    push(S,temp);
+    }
+}
+void Reverse_Stack(struct stack *S)
+{
+    int data;
+    if(isEmpty(S))
+    {
+    return ;
+    }   
+    else
+    {
+    data=pop(S);
+    Reverse_Stack(S);
+    insertAtBottom(S,data);
+    }
+}
+
+int main()
+{
+    struct stack s;
+    int i;
+    initstack(&s);
+    printf("Before Reverse:");
+    for(i=0;i<=5;i++)
+    {
+    printf("%d-->",i);
+    push(&s,i);
+    }
+    Reverse_Stack(&s);
+    printf("After Reverse:");
+    display(&s);
+return 0;
+}
