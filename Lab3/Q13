@@ -1,0 +1,14 @@
+// Pseudo Code for reversing a queue using queue operations only 
+
+queue reverseFunction(queue)
+{
+    if (queue is empty)
+       return queue;
+    else {
+       data = queue.front()
+       queue.pop()
+       queue = reverseFunction(queue);
+       q.push(data);
+       return queue;
+    }
+}
